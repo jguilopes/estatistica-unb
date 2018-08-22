@@ -9,5 +9,5 @@ Livro-texto:
 
 Fontes de dados:
 
-* Kaggle
-* UCI Machine Learning Repository
+* Kaggle (https://www.kaggle.com/datasets)
+* UCI Machine Learning Repository (https://archive.ics.uci.edu/ml/datasets.html)
