@@ -16,3 +16,5 @@ library(tidyverse) # Este comando carrega o pacote 'tidyverse'.
 
 
 # Lembre-se que você somente poderá usar as funções de um pacote após carregá-lo.
+
+# aula dia 24/08
