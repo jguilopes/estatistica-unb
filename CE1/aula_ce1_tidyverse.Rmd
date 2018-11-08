@@ -1,0 +1,188 @@
+---
+title: "Aula CE1 - Introdução ao Tidyverse"
+author: "José Guilherme Lopes"
+output: pdf_document
+---
+
+
+# Instalando e carregando o tidyverse
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+# install.packages("tidyverse")
+
+library(tidyverse)
+
+```
+
+
+
+# ggplot2: Visualização de Dados
+
+
+Um exemplo de dataset:
+```{r}
+
+head(ggplot2::mpg)
+
+```
+
+
+## Código básico criar um gráfico no ggplot:
+
+* 1. função ggplot() + 
+
+* 2. função geom_xxx()
+
+* 3. Especificar o dataset com *data =*
+
+* 4. Especificar as variáveis com *mapping = aes()*
+
+
+Exemplos: 
+
+```{r}
+ggplot(data=mpg)+
+  geom_point(mapping = aes(x=displ, y=hwy))
+```
+
+
+```{r}
+ggplot(data=mpg)+
+  geom_point(mapping = aes(x=displ, y=hwy, colour=class))
+```
+
+
+```{r}
+ggplot(mpg)+
+  geom_point(mapping = aes(x=displ, y=hwy), colour="blue")
+```
+
+
+## Facetas:
+
+* Particiona o gráfico de acordo com uma variável (de preferência categórica)
+
+Exemplos:
+
+```{r}
+ggplot(mpg)+
+  geom_point(mapping = aes(x=displ, y=hwy))+
+  facet_wrap(~ class, nrow=2)
+```
+
+
+```{r}
+ggplot(mpg)+
+  geom_point(mapping = aes(x=displ, y=hwy))+
+  facet_grid(drv ~ cyl)
+
+```
+
+
+## Transformações Estatísticas
+
+* Permitem alterar a transformação que é feita nos dados para geração do gráfico. 
+
+Exemplo:
+
+```{r}
+demo <- tribble(~a, ~b, "bar_1", 20, "bar_2", 30, "bar_3", 40)
+
+ggplot(data=demo)+
+  geom_bar(mapping = aes(x=a, y=b), stat="identity")
+```
+
+
+## Ajustes de Posição
+
+* Permitem alterar a posição em que os objetos são inseridos no gráfico.
+
+Exemplos: 
+
+```{r}
+ggplot(data=diamonds, mapping = aes(x=cut, fill=clarity))+
+  geom_bar(position="identity", alpha=0.20)
+```
+
+
+```{r}
+ggplot(data=diamonds)+
+  geom_bar(mapping = aes(x=cut, fill=clarity), position="fill")
+```
+
+
+```{r}
+ggplot(data=diamonds)+
+  geom_bar(mapping=aes(x=cut, fill=clarity), position="dodge")
+```
+
+
+```{r}
+ggplot(data=mpg)+
+  geom_point(mapping=aes(x=displ, y=hwy), position="jitter")
+```
+
+
+## Sistemas de Coordenadas
+
+* Permitem ajustar os eixos do gráfico.
+
+Exemplo:
+
+```{r}
+ggplot(data=mpg, mapping=aes(x=class, y=displ))+
+  geom_boxplot()
+```
+
+```{r}
+ggplot(data=mpg, mapping=aes(x=class, y=displ))+
+  geom_boxplot()+
+  coord_flip()
+```
+
+
+
+
+
+# dplyr: Transformação e Manipulação de Dados
+
+Funções mais importantes do dplyr:
+
+* **filter()**: filtra observações de acordo com um critério
+
+* **arrange()**: ordena as linhas  
+
+* **select()**: seleciona variáveis  
+
+* **mutate()**: cria novas variáveis que são funções de outras variáveis  
+
+* **summarize()**: resume um grupo de observações  
+
+* **group_by()**: muda o escopo da aplicação de uma função, passando de todo o dataset para grupos definidos. 
+
+
+Recurso bastante útil do dplyr: **o pipe %>%**
+
+
+## Operadores de comparação (útil para *filter*):
+
+* >
+
+* >=
+
+* <
+
+* <=
+
+* !=
+
+* ==
+
+## Operadores lógicos:
+
+* & 
+
+* | 
+
+* !
+
